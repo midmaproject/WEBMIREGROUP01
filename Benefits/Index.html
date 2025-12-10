@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programa Benefits - Miré México & Navio Studio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f0f;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+        
+        /* ========== EFECTO DE BRILLO ========== */
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(37, 99, 235, 0.5), 0 0 60px rgba(37, 99, 235, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(37, 99, 235, 0.7), 0 0 80px rgba(37, 99, 235, 0.5);
+            }
+        }
+        
+        /* ========== NAVEGACIÓN ========== */
+        nav {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+        }
+        
+        nav a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        nav a:hover {
+            color: #60a5fa;
+        }
+        
+        /* ========== HEADER HERO CON BRILLO ========== */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: white;
+            padding: 100px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.2), transparent);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(37, 99, 235, 0.2);
+            border: 1px solid #2563eb;
+            color: #60a5fa;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60a5fa 0%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        /* ========== CONTENEDOR PRINCIPAL ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+        
+        /* ========== SECCIÓN DESCRIPCIÓN PRINCIPAL ========== */
+        .description-section {
+            background: white;
+            border-radius: 16px;
+            padding: 60px;
+            margin-bottom: 80px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            animation: glow 3s ease-in-out infinite;
+        }
+        
+        .description-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+        }
+        
+        .description-section p {
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+        
+        /* ========== GRID DE CARACTERÍSTICAS ========== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            margin-bottom: 80px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.4);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+        
+        /* ========== SECCIÓN IA ========== */
+        .ai-section {
+            background: white;
+            border-radius: 16px;
+            padding: 60px;
+            margin-bottom: 80px;
+            border-left: 6px solid #2563eb;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .ai-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .ai-section h2::before {
+            content: '🤖';
+            margin-right: 15px;
+            font-size: 2rem;
+        }
+        
+        .ai-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .ai-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+        
+        .ai-text p {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.9;
+            margin-bottom: 15px;
+        }
+        
+        .ai-objectives {
+            background: #f0f4ff;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+        
+        .ai-objectives h4 {
+            color: #2563eb;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .ai-objectives ul {
+            list-style: none;
+        }
+        
+        .ai-objectives li {
+            padding: 10px 0;
+            color: #333;
+        }
+        
+        .ai-objectives li:before {
+            content: '✓ ';
+            color: #22c55e;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+        
+        .ai-highlights {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+        }
+        
+        .ai-highlights h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+        }
+        
+        .highlight-item {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .highlight-item:last-child {
+            border-bottom: none;
+        }
+        
+        .highlight-item strong {
+            color: #60a5fa;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .highlight-item p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+        
+        /* ========== SECCIÓN PARTNERSHIP ========== */
+        .partnership-section {
+            background: white;
+            border-radius: 16px;
+            padding: 60px;
+            margin-bottom: 80px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        .partnership-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+        }
+        
+        .partnership-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .logo-box {
+            background: #f0f4ff;
+            padding: 30px;
+            border-radius: 12px;
+            min-width: 150px;
+        }
+        
+        .logo-box h3 {
+            font-size: 1.3rem;
+            color: #2563eb;
+            font-weight: 700;
+        }
+        
+        .partnership-section p {
+            font-size: 1.1rem;
+            color: #333;
+            line-height: 1.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* ========== CTA FINAL ========== */
+        .cta-section {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 80px;
+            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.3);
+        }
+        
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #22c55e;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: #16a34a;
+            transform: translateY(-3px);
+        }
+        
+        /* ========== FOOTER ========== */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        footer a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .ai-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .description-section,
+            .ai-section,
+            .partnership-section,
+            .cta-section {
+                padding: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav>
+        <a href="#inicio">← Volver al inicio</a>
+    </nav>
+    
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Miré México × Navio Studio</div>
+            <h1>Programa Benefits</h1>
+            <p>Tu aliado inteligente en la transformación digital de tu marca</p>
+        </div>
+    </section>
+    
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container">
+        
+        <!-- DESCRIPCIÓN PRINCIPAL -->
+        <section class="description-section">
+            <h2>¿Qué es Benefits?</h2>
+            <p>
+                Benefits es un programa desarrollado conjuntamente por <strong>Miré México</strong> y <strong>Navio Studio</strong> para acompañar a las marcas en su transición hacia una forma de trabajar más inteligente, organizada y humana.
+            </p>
+            <p>
+                A través de capacitaciones, herramientas y sistemas, buscamos que las empresas dejen atrás el modelo del "dinosaurio empresarial" y se adapten a los nuevos ecosistemas impulsados por inteligencia, datos y creatividad.
+            </p>
+            
+            <!-- CARACTERÍSTICAS -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📹</div>
+                    <h3>Videos & Cápsulas</h3>
+                    <p>Contenido educativo en formato video para aprender a tu ritmo</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎁</div>
+                    <h3>Contenido Gratuito</h3>
+                    <p>Recursos y materiales gratuitos en áreas clave de tu negocio</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Actualizaciones Constantes</h3>
+                    <p>Procesos, sistemas y servicio al cliente siempre al día</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Lanzamientos Progresivos</h3>
+                    <p>Nuevo material liberándose constantemente, diseñado para ti</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SECCIÓN DE IA -->
+        <section class="ai-section">
+            <h2>Benefits & Inteligencia Artificial</h2>
+            
+            <div class="ai-content">
+                <div class="ai-text">
+                    <h3>Entrenando el Futuro</h3>
+                    <p>
+                        En Benefits estamos entrenando nuestro propio sistema de inteligencia artificial, utilizando herramientas de vanguardia como ChatGPT y otros sistemas avanzados de IA.
+                    </p>
+                    
+                    <div class="ai-objectives">
+                        <h4>Nuestros Objetivos:</h4>
+                        <ul>
+                            <li>Mejorar procesos internos de las marcas</li>
+                            <li>Optimizar respuestas y flujos de servicio al cliente</li>
+                            <li>Diseñar estrategias basadas en datos</li>
+                            <li>Crear recursos inteligentes sin complicaciones técnicas</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="ai-highlights">
+                    <h3>Estado Actual</h3>
+                    
+                    <div class="highlight-item">
+                        <strong>✓ Herramientas Activas</strong>
+                        <p>Algunas funciones relacionadas con IA ya están disponibles para ciertos clientes y pruebas internas</p>
+                    </div>
+                    
+                    <div class="highlight-item">
+                        <strong>🚀 Próximos Lanzamientos</strong>
+                        <p>Varias funciones relacionadas con IA estarán disponibles próximamente para todos los usuarios de Benefits</p>
+                    </div>
+                    
+                    <div class="highlight-item">
+                        <strong>🔬 En Investigación</strong>
+                        <p>Continuamos probando y refinando nuevas capacidades de IA para ofrecerte lo mejor</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- PARTNERSHIP -->
+        <section class="partnership-section">
+            <h2>Una Alianza Estratégica</h2>
+            <p>
+                La combinación de la visión creativa de Miré México con la experiencia técnica y estratégica de Navio Studio crea un programa único diseñado para empresas que quieren crecer de forma inteligente.
+            </p>
+            
+            <div class="partnership-logos">
+                <div class="logo-box">
+                    <h3>Miré México</h3>
+                    <p style="font-size: 0.85rem; color: #666; margin-top: 10px;">Creatividad & Diseño</p>
+                </div>
+                <div style="font-size: 2rem; color: #2563eb;">+</div>
+                <div class="logo-box">
+                    <h3>Navio Studio</h3>
+                    <p style="font-size: 0.85rem; color: #666; margin-top: 10px;">Estrategia & Tecnología</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA FINAL -->
+        <section class="cta-section">
+            <h2>Únete a Benefits Hoy</h2>
+            <p>Sé parte de la transformación digital. Acceso a capacitaciones, herramientas inteligentes y una comunidad de marcas que crecen juntas.</p>
+            <a href="#contacto" class="cta-button">Solicitar Acceso a Benefits</a>
+        </section>
+        
+    </div>
+    
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Miré México × Navio Studio. Todos los derechos reservados.</p>
+        <p style="margin-top: 10px;">
+            <a href="#">Términos y Condiciones</a> | 
+            <a href="#">Política de Privacidad</a>
+        </p>
+    </footer>
+    
+    <script>
+        // ========== CONFIGURACIÓN FÁCIL DE EDITAR ==========
+        
+        // EMAIL PARA SOLICITUDES DE ACCESO A BENEFITS
+        const EMAIL_BENEFITS = "benefits@miré.com"; // CAMBIA AQUÍ
+        
+        // DESCRIPCIÓN BREVE DEL PROGRAMA (puedes actualizarla)
+        const DESCRIPCION_PROGRAMA = "Program designed to help brands transform digitally";
+        
+        // CARACTERÍSTICAS PRINCIPALES (en orden de importancia)
+        const CARACTERISTICAS = [
+            {
+                icono: "📹",
+                titulo: "Videos & Cápsulas",
+                descripcion: "Contenido educativo en formato video para aprender a tu ritmo"
+            },
+            {
+                icono: "🎁",
+                titulo: "Contenido Gratuito",
+                descripcion: "Recursos y materiales gratuitos en áreas clave de tu negocio"
+            },
+            {
+                icono: "⚡",
+                titulo: "Actualizaciones Constantes",
+                descripcion: "Procesos, sistemas y servicio al cliente siempre al día"
+            },
+            {
+                icono: "🚀",
+                titulo: "Lanzamientos Progresivos",
+                descripcion: "Nuevo material liberándose constantemente, diseñado para ti"
+            }
+        ];
+        
+        // OBJETIVOS DE IA
+        const OBJETIVOS_IA = [
+            "Mejorar procesos internos de las marcas",
+            "Optimizar respuestas y flujos de servicio al cliente",
+            "Diseñar estrategias basadas en datos",
+            "Crear recursos inteligentes sin complicaciones técnicas"
+        ];
+        
+        // ========== LÓGICA ADICIONAL ==========
+        
+        // Ejemplo: Cambiar el estado de disponibilidad de herramientas IA
+        const IA_ACTIVAS = {
+            disponibles: ["Análisis de datos", "Optimización de contenido"],
+            proximamente: ["Generación automática de estrategias", "Chatbot inteligente"],
+            investigacion: ["Predicción de tendencias", "IA conversacional avanzada"]
+        };
+        
+        console.log("Programa Benefits cargado correctamente");
+    </script>
+</body>
+</html>
