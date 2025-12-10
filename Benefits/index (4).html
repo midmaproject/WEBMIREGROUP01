@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios & Paquetes - Miré México</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-blue': '#0E2FAC',
+                        'brand-orange': '#D04C00',
+                        'brand-dark': '#222222',
+                        'brand-light': '#F4F6F8',
+                    },
+                    fontFamily: {
+                        'heading': ['Poppins', 'system-ui', 'sans-serif'],
+                        'body': ['Inter', 'Roboto', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Poppins', system-ui, sans-serif; }
+        
+        /* ========== HEADER ========== */
+        header {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* ========== NAVEGACIÓN ========== */
+        nav {
+            background: white;
+            padding: 20px 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav a {
+            color: #2563eb;
+            text-decoration: none;
+            margin-right: 30px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        nav a:hover {
+            color: #1e40af;
+        }
+        
+        nav a.volver {
+            color: #666;
+        }
+        
+        /* ========== CONTENEDOR PRINCIPAL ========== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        /* ========== SECCIÓN DE PAQUETES ========== */
+        .packages-section {
+            margin-bottom: 100px;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #1a1a1a;
+        }
+        
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .package-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid;
+            position: relative;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        /* COLORES POR PAQUETE */
+        .package-card.smart {
+            border-top-color: #22c55e;
+        }
+        
+        .package-card.standard {
+            border-top-color: #2563eb;
+        }
+        
+        .package-card.plus {
+            border-top-color: #a855f7;
+        }
+        
+        .package-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        
+        .package-card.smart .package-badge {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .package-card.standard .package-badge {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .package-card.plus .package-badge {
+            background: #f3e8ff;
+            color: #6b21a8;
+        }
+        
+        .package-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+        
+        .package-description {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        .package-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .package-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+            color: #333;
+        }
+        
+        .package-features li:before {
+            content: "✓ ";
+            font-weight: 700;
+            margin-right: 8px;
+        }
+        
+        .package-card.smart .package-features li:before {
+            color: #22c55e;
+        }
+        
+        .package-card.standard .package-features li:before {
+            color: #2563eb;
+        }
+        
+        .package-card.plus .package-features li:before {
+            color: #a855f7;
+        }
+        
+        .package-price-section {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #eee;
+        }
+        
+        .price-label {
+            font-size: 0.85rem;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        .price-note {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        /* ========== NOTA DE PRECIOS ========== */
+        .pricing-note {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 60px 0;
+            font-size: 0.95rem;
+            color: #78350f;
+            line-height: 1.8;
+        }
+        
+        /* ========== BENEFICIOS INCLUIDOS ========== */
+        .benefits-section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 60px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .benefits-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #1a1a1a;
+        }
+        
+        .benefits-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .benefits-included, .benefits-excluded {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .benefits-included h4 {
+            color: #22c55e;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .benefits-excluded h4 {
+            color: #ef4444;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .benefits-list {
+            list-style: none;
+        }
+        
+        .benefits-list li {
+            padding: 8px 0;
+            font-size: 0.95rem;
+            color: #333;
+        }
+        
+        .benefits-included li:before {
+            content: "✓ ";
+            color: #22c55e;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+        
+        .benefits-excluded li:before {
+            content: "✗ ";
+            color: #ef4444;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+        
+        /* ========== TÉRMINOS ========== */
+        .terms-section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 60px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .terms-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #1a1a1a;
+        }
+        
+        .terms-list {
+            list-style: none;
+        }
+        
+        .terms-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        .terms-list li:before {
+            content: "•";
+            color: #2563eb;
+            font-weight: 700;
+            margin-right: 12px;
+        }
+        
+        /* ========== SECCIÓN BETA ========== */
+        .beta-section {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f8faff 100%);
+            border: 2px dashed #2563eb;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 60px 0;
+            text-align: center;
+        }
+        
+        .beta-badge {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        
+        .beta-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #1a1a1a;
+            margin: 20px 0;
+        }
+        
+        .beta-section p {
+            font-size: 1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 20px auto;
+            line-height: 1.8;
+        }
+        
+        /* ========== SECCIÓN DE COTIZACIÓN ========== */
+        .quote-section {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 12px;
+            margin: 80px 0;
+            text-align: center;
+        }
+        
+        .quote-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .quote-section p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+        
+        .quote-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .form-group select,
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+        }
+        
+        .form-group select {
+            cursor: pointer;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .submit-btn {
+            background: #22c55e;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: #16a34a;
+        }
+        
+        /* ========== FOOTER ========== */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        footer a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .benefits-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .quote-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVEGACIÓN -->
+    <nav>
+        <a href="#inicio" class="volver">← Volver al inicio</a>
+    </nav>
+    
+    <!-- HEADER -->
+    <header>
+        <h1>Servicios & Paquetes</h1>
+        <p>Soluciones diseñadas para que tu marca brille en cada plataforma</p>
+    </header>
+    
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="container">
+        
+        <!-- SECCIÓN DE PAQUETES DISPONIBLES -->
+        <section class="packages-section">
+            <h2 class="section-title">Paquetes Diseñados y Disponibles</h2>
+            
+            <div class="packages-grid">
+                
+                <!-- PAQUETE S-MART -->
+                <div class="package-card smart">
+                    <span class="package-badge">🟢 S-Mart</span>
+                    <h3 class="package-name">S-Mart</h3>
+                    <p class="package-description">El punto de partida perfecto para marcas que quieren generar presencia consistente en redes sociales sin complejidad.</p>
+                    
+                    <ul class="package-features">
+                        <li>12 publicaciones originales</li>
+                        <li>2 publicaciones base (recurrentes)</li>
+                        <li>2 reels básicos</li>
+                        <li>4 historias bandeadas</li>
+                    </ul>
+                    
+                    <div class="package-price-section">
+                        <div class="price-label">Precio Lanzamiento (Primer Mes)</div>
+                        <div class="price">$949.99</div>
+                        <div class="price-note">MXN • Después: ~$1,149.99</div>
+                    </div>
+                </div>
+                
+                <!-- PAQUETE STANDARD -->
+                <div class="package-card standard">
+                    <span class="package-badge">🔵 Standard</span>
+                    <h3 class="package-name">Standard</h3>
+                    <p class="package-description">Nuestro paquete más equilibrado, ideal para marcas que buscan crecer con estrategia y estructura en sus campañas.</p>
+                    
+                    <ul class="package-features">
+                        <li>15 publicaciones</li>
+                        <li>4 publicaciones base</li>
+                        <li>2 reels con estructura</li>
+                        <li>1 manejo de campaña ADS</li>
+                    </ul>
+                    
+                    <div class="package-price-section">
+                        <div class="price-label">Precio Lanzamiento (Primer Mes)</div>
+                        <div class="price">$1,599</div>
+                        <div class="price-note">MXN • Después: ~$1,899</div>
+                    </div>
+                </div>
+                
+                <!-- PAQUETE STANDARD PLUS -->
+                <div class="package-card plus">
+                    <span class="package-badge">🟣 Standard Plus</span>
+                    <h3 class="package-name">Standard Plus</h3>
+                    <p class="package-description">Nuestro paquete premium con metodología Navio™ integrada. Para marcas que quieren dominancia y presencia estratégica.</p>
+                    
+                    <ul class="package-features">
+                        <li>18 publicaciones</li>
+                        <li>8 publicaciones base</li>
+                        <li>2 reels con estructura + Navio™ + CTA</li>
+                        <li>2 manejos de campaña ADS</li>
+                    </ul>
+                    
+                    <div class="package-price-section">
+                        <div class="price-label">Precio Lanzamiento (Primer Mes)</div>
+                        <div class="price">$1,999</div>
+                        <div class="price-note">MXN • Después: ~$2,299</div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- NOTA SOBRE PRECIOS -->
+            <div class="pricing-note">
+                <strong>Nota importante sobre precios:</strong><br><br>
+                Los precios mostrados son promocionales y válidos únicamente durante el primer mes de lanzamiento de los paquetes. A partir del segundo mes, los precios se ajustan entre $200 y $300 MXN según el paquete y las condiciones del mercado.<br><br>
+                Si ya eres cliente de Miré México, puedes solicitar una revisión exclusiva de tarifa o beneficios preferenciales por tu lealtad. ¡Nos encanta trabajar con marcas que confían en nosotros!
+            </div>
+        </section>
+        
+        <!-- BENEFICIOS INCLUIDOS EN TODOS LOS PAQUETES -->
+        <section class="benefits-section">
+            <h3>Beneficios Incluidos en Todos Nuestros Paquetes</h3>
+            
+            <div class="benefits-content">
+                <div class="benefits-included">
+                    <h4>✓ Incluido en tu paquete</h4>
+                    <ul class="benefits-list">
+                        <li>Manejo integral básico de redes sociales durante 4 meses</li>
+                        <li>Actualizaciones visuales por temporada (Navidad, Pascua, Día de Muertos, etc.)</li>
+                        <li>Ajustes de diseño aplicables cuando desees cambiar publicaciones por flyers o pósters</li>
+                        <li>Respuesta parcial a comentarios</li>
+                        <li>Respuesta total a mensajes por Messenger</li>
+                    </ul>
+                </div>
+                
+                <div class="benefits-excluded">
+                    <h4>✗ No incluido en los paquetes</h4>
+                    <ul class="benefits-list">
+                        <li>Campañas avanzadas y estructuradas fuera de las incluidas</li>
+                        <li>Actualizaciones o mantenimiento de sitios web</li>
+                        <li>Diseño UX específico para web (solo con contratación de diseño web adicional)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- TÉRMINOS Y CONDICIONES ACTUALIZADOS -->
+        <section class="terms-section">
+            <h3>Términos y Condiciones</h3>
+            
+            <ul class="terms-list">
+                <li><strong>Contenido viral:</strong> Si un contenido se vuelve viral y genera una sobrecarga de mensajes o comentarios, la atención se ofrecerá hasta donde lo permita la capacidad operativa del equipo.</li>
+                
+                <li><strong>Ajustes de políticas:</strong> Miré México se reserva el derecho de ajustar sus políticas y condiciones de servicio sin previo aviso.</li>
+                
+                <li><strong>Responsabilidad de proveedores externos:</strong> En servicios que requieran proveedores externos (imprentas, distribución, etc.), Miré México actúa solo como gestor y enlace. La responsabilidad de producción, entrega y logística recae exclusivamente en dichos terceros. Al contratar nuestros servicios, aceptas estos términos.</li>
+            </ul>
+        </section>
+        
+        <!-- SECCIÓN BETA -->
+        <section class="beta-section">
+            <div class="beta-badge">Versión Beta</div>
+            <h3>Estamos probando nuevas ideas contigo</h3>
+            <p>
+                Nuestros servicios en fase Beta son innovaciones que estamos evaluando junto a nuestros clientes. Son servicios en prueba, aún en evaluación de su impacto, atractivo y desempeño.
+            </p>
+            <p style="font-size: 0.95rem; color: #999; margin-top: 15px;">
+                Si te interesa probar algo nuevo con nosotros, puedes solicitarlo bajo el entendimiento de que está en versión Beta. Tu feedback será invaluable para decidir si se integra como servicio oficial.
+            </p>
+        </section>
+        
+        <!-- SECCIÓN DE COTIZACIÓN -->
+        <section class="quote-section">
+            <h2>Cotiza Tu Paquete Hoy</h2>
+            <p>Elige el paquete que mejor se adapta a tu marca, envíanos tus datos y te acompañamos en cada paso.</p>
+            
+            <form class="quote-form" id="quoteForm">
+                <div class="form-group">
+                    <label for="package">Selecciona tu paquete:</label>
+                    <select id="package" required>
+                        <option value="">-- Elige un paquete --</option>
+                        <option value="smart">S-Mart - $949.99 MXN</option>
+                        <option value="standard">Standard - $1,599 MXN</option>
+                        <option value="plus">Standard Plus - $1,999 MXN</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Tu nombre:</label>
+                    <input type="text" id="name" placeholder="¿Cómo te llamas?" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="brand">Nombre de tu marca:</label>
+                    <input type="text" id="brand" placeholder="¿Cuál es el nombre de tu marca?" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Tu email:</label>
+                    <input type="email" id="email" placeholder="tu@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Teléfono (opcional):</label>
+                    <input type="tel" id="phone" placeholder="+52 (XXX) XXX-XXXX">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Cuéntanos sobre tu marca (opcional):</label>
+                    <textarea id="message" placeholder="¿Qué hace tu marca? ¿Cuál es tu objetivo?"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Enviar Cotización</button>
+            </form>
+        </section>
+        
+    </div>
+    
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Miré México. Todos los derechos reservados.</p>
+        <p style="margin-top: 10px;">
+            <a href="#">Términos y Condiciones</a> | 
+            <a href="#">Política de Privacidad</a>
+        </p>
+    </footer>
+    
+    <script>
+        // ========== CONFIGURACIÓN FÁCIL DE EDITAR ==========
+        // PRECIOS Y PAQUETES - CAMBIA AQUÍ
+        const PAQUETES = {
+            smart: {
+                nombre: "S-Mart",
+                precio_lanzamiento: 949.99,
+                precio_normal: 1149.99
+            },
+            standard: {
+                nombre: "Standard",
+                precio_lanzamiento: 1599,
+                precio_normal: 1899
+            },
+            plus: {
+                nombre: "Standard Plus",
+                precio_lanzamiento: 1999,
+                precio_normal: 2299
+            }
+        };
+        
+        // EMAIL PARA RECIBIR COTIZACIONES
+        const EMAIL_DESTINO = "contacto@miré.com"; // CAMBIA AQUÍ
+        
+        // MENSAJE DE CONFIRMACIÓN
+        const MENSAJE_CONFIRMACION = "¡Gracias por tu cotización! Nos pondremos en contacto pronto.";
+        
+        // ========== LÓGICA DEL FORMULARIO ==========
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const paquete = document.getElementById('package').value;
+            const nombre = document.getElementById('name').value;
+            const marca = document.getElementById('brand').value;
+            const email = document.getElementById('email').value;
+            const telefono = document.getElementById('phone').value;
+            const mensaje = document.getElementById('message').value;
+            
+            // Construir mensaje
+            const contenido = `
+Cotización de Paquete:
+- Paquete: ${PAQUETES[paquete].nombre}
+- Nombre: ${nombre}
+- Marca: ${marca}
+- Email: ${email}
+- Teléfono: ${telefono || 'No proporcionado'}
+- Mensaje: ${mensaje || 'Sin mensaje adicional'}
+            `;
+            
+            // Aquí iría la integración con API de email
+            console.log("Datos de cotización:", {paquete, nombre, marca, email, telefono, mensaje});
+            
+            alert(MENSAJE_CONFIRMACION);
+            this.reset();
+        });
+    </script>
+</body>
+</html>
